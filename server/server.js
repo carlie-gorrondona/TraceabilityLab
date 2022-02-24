@@ -23,4 +23,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
+app.post('/api/student', (req, res)=>{
+    let {name} = req.body
+    name = name.trim()
+
+    students.push(name)
+
+    rollbar.log('student was added successfully', {author: "Carlie", type: "manual", student: name})
+
+    res.status(200).send(students)
+})
+
 app.listen(port, () => console.log(`Hephaestus override on Cauldron port ${port}`));
